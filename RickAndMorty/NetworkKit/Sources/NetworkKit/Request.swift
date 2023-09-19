@@ -10,5 +10,6 @@ public protocol Request {
     var urlPath: String { get }
     var httpMethod: HTTPMethod { get }
     var timeout: TimeInterval { get }
+    var parameters: [String: String] { get }
     var body: Data? { get }
 }

@@ -2,8 +2,7 @@ import Foundation
 import NetworkKit
 
 protocol EpisodesRepositoryProtocol {
-    func getEpisode(id: Int) async throws -> Episode
-    func getEpisodeList() async throws -> [Episode]
+    func getEpisodeList(page: Int) async throws -> PaginatedEpisodesResult
 }
 
 class EpisodesRepository: EpisodesRepositoryProtocol {
@@ -13,23 +12,36 @@ class EpisodesRepository: EpisodesRepositoryProtocol {
         self.networkManager = networkManager
     }
 
-    func getEpisode(id: Int) async throws -> Episode {
-        try await networkManager.runRequest(EpisodesRequest()).results[0]
-    }
-
-    func getEpisodeList() async throws -> [Episode] {
-        try await networkManager.runRequest(EpisodesRequest()).results
+    func getEpisodeList(page: Int) async throws -> PaginatedEpisodesResult {
+        try await networkManager.runRequest(EpisodesRequest(page: page))
     }
 }
 
 struct EpisodesRequest: Request {
-    typealias ResultType = EpisodesResult
+    typealias ResultType = PaginatedEpisodesResult
     var urlPath: String { "episode" }
     var httpMethod: HTTPMethod { .get }
     var body: Data? { nil }
     var timeout: TimeInterval { 30 }
+    var parameters: [String : String] { ["page": page.formatted()] }
+
+    var page: Int
+
+    init(page: Int) {
+        self.page = page
+    }
 }
 
-struct EpisodesResult: Codable {
+struct PaginatedEpisodesResult: Codable {
+    let info: PaginationInfo
     let results: [Episode]
+}
+
+struct PaginationInfo: Codable {
+    var count: Int
+    var pages: Int
+    var next: URL?
+    var prev: URL?
+
+    var isNextPageAvailable: Bool { next != nil }
 }

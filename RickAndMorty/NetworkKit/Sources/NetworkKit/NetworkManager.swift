@@ -21,9 +21,19 @@ public class NetworkManager: NetworkManagerProtocol {
     }
 
     public func runRequest<R: Request>(_ request: R) async throws -> R.ResultType {
-        guard
-            let url = URL(string: baseURLPath + request.urlPath)
-        else { throw NetworkError.incorrectURL(base: baseURLPath, injected: request.urlPath) }
+        guard var urlComponents = URLComponents(string: baseURLPath + request.urlPath) else {
+            throw NetworkError.incorrectURL(base: baseURLPath, injected: request.urlPath)
+        }
+        if !request.parameters.isEmpty {
+            urlComponents.queryItems = request.parameters.map { key, value in
+                URLQueryItem(name: key, value: value)
+            }
+        }
+
+        guard let url = urlComponents.url else {
+            throw NetworkError.incorrectURL(base: baseURLPath, injected: request.urlPath)
+        }
+
         var urlRequest = URLRequest(
             url: url,
             timeoutInterval: request.timeout
@@ -32,6 +42,7 @@ public class NetworkManager: NetworkManagerProtocol {
         urlRequest.httpBody = request.body
 
         do {
+            print("RUNNING REQUEST: \(urlRequest.url)")
             let (data, statusCode) = try await session.run(request: urlRequest)
             if statusCode == 200 {
                 return try jsonSerializer.decode(data: data, type: R.ResultType.self)

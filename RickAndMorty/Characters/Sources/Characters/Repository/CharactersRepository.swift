@@ -28,6 +28,7 @@ struct CharactersRequest: Request {
     var httpMethod: HTTPMethod { .get }
     var body: Data? { nil }
     var timeout: TimeInterval { 30 }
+    var parameters: [String : String] { [:] }
 }
 
 struct CharactersResult: Codable {
