@@ -1,6 +1,7 @@
 import SwiftUI
 import Episodes
 import Characters
+import DesignKit
 
 struct Menu: View {
     var body: some View {
@@ -9,12 +10,17 @@ struct Menu: View {
                 CharacterListView()
                     .navigationTitle("Characters")
             }
-            .tabItem { Label("Characters", systemImage: "person.crop.circle") }
+            .tabItem { Label("Characters", image: .characters) }
             NavigationView {
                 EpisodeListView()
                     .navigationTitle("Episodes")
             }
-            .tabItem { Label("Episodes", systemImage: "tv") }
+            .tabItem { Label("Episodes", image: .episodes) }
+            NavigationView {
+                FavouritesListView()
+                    .navigationTitle("Favourites")
+            }
+            .tabItem { Label("Favourites", image: .favourites) }
         }
     }
 }

@@ -72,12 +72,3 @@ struct PaginatedCharacterResult: Codable {
     let info: PaginationInfo
     let results: [Character]
 }
-
-struct PaginationInfo: Codable {
-    var count: Int
-    var pages: Int
-    var next: URL?
-    var prev: URL?
-
-    var isNextPageAvailable: Bool { next != nil }
-}

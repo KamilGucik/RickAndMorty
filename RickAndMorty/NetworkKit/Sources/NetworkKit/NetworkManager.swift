@@ -42,7 +42,6 @@ public class NetworkManager: NetworkManagerProtocol {
         urlRequest.httpBody = request.body
 
         do {
-            print("RUNNING REQUEST: \(urlRequest.url)")
             let (data, statusCode) = try await session.run(request: urlRequest)
             if statusCode == 200 {
                 return try jsonSerializer.decode(data: data, type: R.ResultType.self)

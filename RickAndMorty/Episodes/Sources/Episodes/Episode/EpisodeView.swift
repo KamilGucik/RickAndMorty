@@ -19,7 +19,7 @@ struct EpisodeView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color(.surface))
+        .background(.bar)
         .cornerRadius(16)
     }
 }
