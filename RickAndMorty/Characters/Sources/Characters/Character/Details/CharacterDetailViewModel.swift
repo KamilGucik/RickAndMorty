@@ -3,7 +3,7 @@ import LocalStorageKit
 
 @MainActor
 class CharacterDetailViewModel: ObservableObject {
-    let coreDataManager = CoreDataManager.shared
+    let coreDataManager: CoreDataManagerProtocol
     let locationRepository: LocationRepositoryProtocol
     let character: Character
 
@@ -14,10 +14,12 @@ class CharacterDetailViewModel: ObservableObject {
 
     init(
         character: Character,
-        locationRepository: LocationRepositoryProtocol = LocationRepository()
+        locationRepository: LocationRepositoryProtocol = LocationRepository(),
+        coreDataManager: CoreDataManagerProtocol = CoreDataManager.shared
     ) {
         self.character = character
         self.locationRepository = locationRepository
+        self.coreDataManager = coreDataManager
     }
 
     func fetchCharactersInLocation() async {
@@ -31,15 +33,14 @@ class CharacterDetailViewModel: ObservableObject {
         } catch {
             isLoading = false
             showError = true
-            print(error)
         }
     }
 
     func tapFavourite() {
         if isCharacterFavourite {
-            coreDataManager.removeCharacter(id: character.id)
+            try? coreDataManager.removeCharacter(id: character.id)
         } else {
-            addCharacterToStorage()
+            try? addCharacterToStorage()
         }
         checkIfIsFavourite()
     }
@@ -48,8 +49,8 @@ class CharacterDetailViewModel: ObservableObject {
         isCharacterFavourite = coreDataManager.checkIfCharacterExists(id: character.id)
     }
 
-    private func addCharacterToStorage() {
-        coreDataManager.addCharacter(
+    private func addCharacterToStorage() throws {
+        try coreDataManager.addCharacter(
             id: character.id,
             name: character.name,
             status: character.status.rawValue,

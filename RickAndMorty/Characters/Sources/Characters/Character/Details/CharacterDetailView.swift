@@ -52,7 +52,9 @@ struct CharacterDetailView: View {
     }
 
     private var charactersInLocation: some View {
-        Section("Other characters in location") {
+        VStack(alignment: .leading) {
+            Text("Other characters in location")
+                .font(.body)
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     ForEach(viewModel.charactersInLocation) { character in

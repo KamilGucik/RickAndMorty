@@ -2,7 +2,36 @@ import Foundation
 import SwiftUI
 import CoreData
 
-public class CoreDataManager {
+public protocol CoreDataManagerProtocol {
+    func addCharacter(
+        id: Int,
+        name: String,
+        status: String,
+        species: String,
+        type: String?,
+        gender: String,
+        locationName: String,
+        locationURL: String,
+        image: String,
+        episode: [String]
+    ) throws
+    func removeCharacter(id: Int) throws
+    func fetch() throws -> [Character]
+    func checkIfCharacterExists(id: Int) -> Bool
+}
+
+public enum CoreDataManagerError: String, LocalizedError {
+    case insert
+    case remove
+    case save
+    case fetch
+
+    public var errorDescription: String? {
+        return "Error occurred while running: \(self.rawValue) operation"
+    }
+}
+
+public class CoreDataManager: CoreDataManagerProtocol {
     public static let shared = CoreDataManager()
     let modelName = "Model"
 
@@ -30,7 +59,7 @@ public class CoreDataManager {
         locationURL: String,
         image: String,
         episode: [String]
-    ) {
+    ) throws {
         let context = persistentContainer.viewContext
         if let character = NSEntityDescription.insertNewObject(
             forEntityName: "Character",
@@ -51,33 +80,32 @@ public class CoreDataManager {
                 context.insert(character)
                 try context.save()
             } catch {
-                print("❌ Failed to create Character: \(error.localizedDescription)")
+                throw CoreDataManagerError.insert
             }
         }
     }
 
-    public func removeCharacter(id: Int) {
+    public func removeCharacter(id: Int) throws {
         let context = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<Character>(entityName: "Character")
         do {
-            let characters = try context.fetch(fetchRequest).filter { $0.id == id }
-            characters.forEach { character in
+            try fetch()
+                .filter { $0.id == id }
+                .forEach { character in
                 context.delete(character)
             }
             try context.save()
         } catch {
-            print("❌ Failed to fetch Person:", error)
+            throw CoreDataManagerError.remove
         }
     }
 
-    public func fetch() -> [Character] {
+    public func fetch() throws -> [Character] {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<Character>(entityName: "Character")
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            print("❌ Failed to fetch Person:", error)
-            return []
+            throw CoreDataManagerError.fetch
         }
     }
 
@@ -85,10 +113,8 @@ public class CoreDataManager {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<Character>(entityName: "Character")
         do {
-            let characters = try context.fetch(fetchRequest)
-            return characters.contains(where: { $0.id == id })
+            return try fetch().contains(where: { $0.id == id })
         } catch {
-            print("❌ Failed to fetch Person:", error)
             return false
         }
     }
