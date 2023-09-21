@@ -11,13 +11,16 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../NetworkKit"),
+        .package(path: "../DesignKit")
     ],
     targets: [
         .target(
             name: "Episodes",
             dependencies: [
-                "NetworkKit"
-            ]),
+                "NetworkKit",
+                "DesignKit"
+            ]
+        ),
         .testTarget(
             name: "EpisodesTests",
             dependencies: ["Episodes"]),

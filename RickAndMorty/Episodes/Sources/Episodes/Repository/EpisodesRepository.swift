@@ -2,7 +2,21 @@ import Foundation
 import NetworkKit
 
 protocol EpisodesRepositoryProtocol {
-    func getEpisodeList(page: Int) async throws -> PaginatedEpisodesResult
+    func getEpisodeList(
+        page: Int?,
+        name: String?,
+        episode: String?
+    ) async throws -> PaginatedEpisodesResult
+}
+
+extension EpisodesRepositoryProtocol {
+    func getEpisodeList(
+        page: Int?,
+        name: String? = nil,
+        episode: String? = nil
+    ) async throws -> PaginatedEpisodesResult {
+        try await getEpisodeList(page: page, name: name, episode: episode)
+    }
 }
 
 class EpisodesRepository: EpisodesRepositoryProtocol {
@@ -12,23 +26,41 @@ class EpisodesRepository: EpisodesRepositoryProtocol {
         self.networkManager = networkManager
     }
 
-    func getEpisodeList(page: Int) async throws -> PaginatedEpisodesResult {
-        try await networkManager.runRequest(EpisodesRequest(page: page))
+    func getEpisodeList(page: Int?, name: String?, episode: String?) async throws -> PaginatedEpisodesResult {
+        try await networkManager.runRequest(EpisodeRequest(
+            page: page,
+            name: name,
+            episode: episode
+        ))
     }
 }
 
-struct EpisodesRequest: Request {
+struct EpisodeRequest: Request {
     typealias ResultType = PaginatedEpisodesResult
     var urlPath: String { "episode" }
     var httpMethod: HTTPMethod { .get }
     var body: Data? { nil }
     var timeout: TimeInterval { 30 }
-    var parameters: [String : String] { ["page": page.formatted()] }
+    var parameters: [String : String] {
+        var params: [String : String] = [:]
+        if let page { params["page"] = page.formatted() }
+        if let name, !name.isEmpty { params["name"] = name }
+        if let episode, !episode.isEmpty { params["episode"] = episode }
+        return params
+    }
 
-    var page: Int
+    var page: Int?
+    var name: String?
+    var episode: String?
 
-    init(page: Int) {
+    init(
+        page: Int? = nil,
+        name: String? = nil,
+        episode: String? = nil
+    ) {
         self.page = page
+        self.name = name
+        self.episode = episode
     }
 }
 

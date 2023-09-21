@@ -9,12 +9,12 @@ struct Menu: View {
                 CharacterListView()
                     .navigationTitle("Characters")
             }
-            .tabItem { Text("Characters").font(.headline) }
+            .tabItem { Label("Characters", systemImage: "person.crop.circle") }
             NavigationView {
                 EpisodeListView()
                     .navigationTitle("Episodes")
             }
-            .tabItem { Text("Episodes").font(.headline) }
+            .tabItem { Label("Episodes", systemImage: "tv") }
         }
     }
 }

@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignKit
 
 struct EpisodeView: View {
     let episode: Episode
@@ -18,7 +19,7 @@ struct EpisodeView: View {
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.blue.opacity(0.5))
+        .background(Color(.surface))
         .cornerRadius(16)
     }
 }
