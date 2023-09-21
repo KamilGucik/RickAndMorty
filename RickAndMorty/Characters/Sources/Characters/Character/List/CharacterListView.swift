@@ -1,8 +1,8 @@
 import SwiftUI
 import DesignKit
 
-public struct EpisodeListView: View {
-    @StateObject private var viewModel = EpisodeListViewModel()
+public struct CharacterListView: View {
+    @StateObject private var viewModel = CharacterListViewModel()
 
     public init() {}
 
@@ -10,8 +10,13 @@ public struct EpisodeListView: View {
         PaginatedList(
             canFetchNextPage: $viewModel.isNextPageAvailable,
             isLoading: $viewModel.isLoadingNextPage,
-            elements: viewModel.episodes,
-            content: { EpisodeView($0) },
+            elements: viewModel.characters,
+            content: { character in
+                NavigationLink(
+                    destination: { CharacterDetailView(character) },
+                    label: { CharacterView(character) }
+                )
+            },
             nextPageAction: { await viewModel.nextPage() }
         )
         .loadable(
@@ -21,7 +26,10 @@ public struct EpisodeListView: View {
         )
         .didLoad { await viewModel.observeInputs() }
         .sheet(isPresented: $viewModel.presentFilters) {
-            filters
+            CharactersFiltersView(
+                filters: $viewModel.filters,
+                clearAction: { viewModel.clearFilters() }
+            )
                 .presentationDetents([.medium])
         }
         .addFiltersItem(
@@ -31,23 +39,12 @@ public struct EpisodeListView: View {
         .scrollIndicators(.hidden)
         .refreshable { Task { await viewModel.refresh() }}
     }
-
-    private var filters: some View {
-        VStack(spacing: 32) {
-            ClearButton { viewModel.clearFilters() }
-            GroupBox {
-                VStack(spacing: 16) {
-                    TextField("Name", text: $viewModel.filters.name)
-                    TextField("Episode", text: $viewModel.filters.episode)
-                }
-            }
-        }
-        .padding(24)
-    }
 }
 
-struct EpisodeListView_Previews: PreviewProvider {
+struct CharacterListView_Previews: PreviewProvider {
     static var previews: some View {
-        EpisodeListView()
+        CharacterListView()
+        //TODO: MOCK
     }
 }
+

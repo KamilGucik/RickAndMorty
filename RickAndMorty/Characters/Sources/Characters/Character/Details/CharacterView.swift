@@ -4,6 +4,10 @@ import DesignKit
 struct CharacterView: View {
     let character: Character
 
+    init(_ character: Character) {
+        self.character = character
+    }
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             AsyncImageView(url: URL(string: character.image))
@@ -19,6 +23,6 @@ struct CharacterView: View {
 
 struct CharacterView_Previews: PreviewProvider {
     static var previews: some View {
-        CharacterView(character: .mock(id: 2))
+        CharacterView(.mock(id: 2))
     }
 }

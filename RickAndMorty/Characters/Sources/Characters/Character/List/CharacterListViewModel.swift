@@ -2,13 +2,13 @@ import Foundation
 import Combine
 
 @MainActor
-class EpisodeListViewModel: ObservableObject {
-    @Published var episodes: [Episode] = []
+class CharacterListViewModel: ObservableObject {
+    @Published var characters: [Character] = []
     @Published var isNextPageAvailable = true
     @Published var presentFilters = false
 
-    @Published var filters: EpisodeFilterParameters = .init()
-    @Published var areFiltersSelected = false
+    @Published var filters: CharacterFilterParameters = .init()
+    @Published var areFiltersSelected: Bool = false
 
     @Published var isLoading = false
     @Published var showError = false
@@ -16,19 +16,19 @@ class EpisodeListViewModel: ObservableObject {
     @Published var isLoadingNextPage = false
     @Published var showNextPageError = false
 
-    private var page = 1
-    private let episodesRepository: EpisodesRepositoryProtocol
+    private var page: Int = 1
+    private let charactersRepository: CharactersRepositoryProtocol
 
-    init(episodesRepository: EpisodesRepositoryProtocol = EpisodesRepository()) {
-        self.episodesRepository = episodesRepository
+    init(charactersRepository: CharactersRepositoryProtocol = CharactersRepository()) {
+        self.charactersRepository = charactersRepository
     }
 
     func nextPage() async {
         do {
             isLoadingNextPage = true
             showNextPageError = false
-            self.page += 1
-            self.episodes += try await getPaginatedEpisodes()
+            page += 1
+            characters += try await getPaginatedCharacters()
             isLoadingNextPage = false
         } catch {
             isLoadingNextPage = false
@@ -41,12 +41,21 @@ class EpisodeListViewModel: ObservableObject {
             isLoading = true
             showError = false
             page = 1
-            self.episodes = try await getPaginatedEpisodes()
+            characters = try await getPaginatedCharacters()
             isLoading = false
         } catch {
             showError = true
             isLoading = false
         }
+    }
+
+    func clearFilters() {
+        filters.name = ""
+        filters.status = nil
+        filters.species = ""
+        filters.type = ""
+        filters.gender = nil
+        areFiltersSelected = false
     }
 
     func observeInputs() async {
@@ -59,14 +68,8 @@ class EpisodeListViewModel: ObservableObject {
         }
     }
 
-    func clearFilters() {
-        filters.name = ""
-        filters.episode = ""
-        areFiltersSelected = false
-    }
-
-    private func getPaginatedEpisodes() async throws -> [Episode] {
-        let paginatedResult = try await episodesRepository.getEpisodeList(
+    private func getPaginatedCharacters() async throws -> [Character] {
+        let paginatedResult = try await charactersRepository.getCharacterList(
             page: page,
             filters: filters
         )

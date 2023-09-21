@@ -9,6 +9,7 @@ public enum Images {
         case episodes
         case characters
         case favourites
+        case download
 
         public var imageName: String {
             switch self {
@@ -19,6 +20,7 @@ public enum Images {
             case .episodes: return "tv"
             case .characters: return "person.crop.circle"
             case .favourites: return "heart.circle"
+            case .download: return "arrow.down.circle.fill"
             }
         }
     }

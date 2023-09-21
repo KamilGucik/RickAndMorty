@@ -14,11 +14,13 @@
 		8E15198F2AB8DA160006F6E9 /* SerializationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E15198E2AB8DA160006F6E9 /* SerializationKit */; };
 		8E1519922AB9005E0006F6E9 /* Episodes in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1519912AB9005E0006F6E9 /* Episodes */; };
 		8E1519952AB90A460006F6E9 /* Characters in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1519942AB90A460006F6E9 /* Characters */; };
+		8E5DDC282ABBD32C008AEB76 /* LocalStorageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E5DDC272ABBD32C008AEB76 /* LocalStorageKit */; };
 		8E6E289D2ABB4CED00568280 /* DesignKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6E289C2ABB4CED00568280 /* DesignKit */; };
 		8E9236AF2ABB767700DC20E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9236AE2ABB767600DC20E1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E0642AC2ABBC7B90009FCB6 /* LocalStorageKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocalStorageKit; sourceTree = "<group>"; };
 		8E1519742AB8C1970006F6E9 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E1519772AB8C1970006F6E9 /* RickAndMortyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyApp.swift; sourceTree = "<group>"; };
 		8E1519792AB8C1970006F6E9 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 				8E1519952AB90A460006F6E9 /* Characters in Frameworks */,
 				8E1519922AB9005E0006F6E9 /* Episodes in Frameworks */,
 				8E6E289D2ABB4CED00568280 /* DesignKit in Frameworks */,
+				8E5DDC282ABBD32C008AEB76 /* LocalStorageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +71,7 @@
 		8E1519762AB8C1970006F6E9 /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				8E0642AC2ABBC7B90009FCB6 /* LocalStorageKit */,
 				8E6E289B2ABB48E900568280 /* DesignKit */,
 				8E1519932AB901CA0006F6E9 /* Characters */,
 				8E1519902AB8F7C70006F6E9 /* Episodes */,
@@ -119,6 +123,7 @@
 				8E1519912AB9005E0006F6E9 /* Episodes */,
 				8E1519942AB90A460006F6E9 /* Characters */,
 				8E6E289C2ABB4CED00568280 /* DesignKit */,
+				8E5DDC272ABBD32C008AEB76 /* LocalStorageKit */,
 			);
 			productName = RickAndMorty;
 			productReference = 8E1519742AB8C1970006F6E9 /* RickAndMorty.app */;
@@ -416,6 +421,10 @@
 		8E1519942AB90A460006F6E9 /* Characters */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Characters;
+		};
+		8E5DDC272ABBD32C008AEB76 /* LocalStorageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocalStorageKit;
 		};
 		8E6E289C2ABB4CED00568280 /* DesignKit */ = {
 			isa = XCSwiftPackageProductDependency;

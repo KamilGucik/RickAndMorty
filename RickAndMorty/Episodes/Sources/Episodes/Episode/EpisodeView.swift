@@ -4,6 +4,10 @@ import DesignKit
 struct EpisodeView: View {
     let episode: Episode
 
+    init(_ episode: Episode) {
+        self.episode = episode
+    }
+
     var body: some View {
         VStack(alignment: .leading) {
             Text(episode.name)
@@ -39,6 +43,6 @@ struct EpisodeView_Previews: PreviewProvider {
             created: "2017-11-10T12:56:36.618Z"
         )
 
-        return EpisodeView(episode: episode)
+        return EpisodeView(episode)
     }
 }

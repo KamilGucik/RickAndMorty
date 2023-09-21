@@ -4,19 +4,8 @@ import NetworkKit
 protocol EpisodesRepositoryProtocol {
     func getEpisodeList(
         page: Int?,
-        name: String?,
-        episode: String?
+        filters: EpisodeFilterParameters?
     ) async throws -> PaginatedEpisodesResult
-}
-
-extension EpisodesRepositoryProtocol {
-    func getEpisodeList(
-        page: Int?,
-        name: String? = nil,
-        episode: String? = nil
-    ) async throws -> PaginatedEpisodesResult {
-        try await getEpisodeList(page: page, name: name, episode: episode)
-    }
 }
 
 class EpisodesRepository: EpisodesRepositoryProtocol {
@@ -26,11 +15,13 @@ class EpisodesRepository: EpisodesRepositoryProtocol {
         self.networkManager = networkManager
     }
 
-    func getEpisodeList(page: Int?, name: String?, episode: String?) async throws -> PaginatedEpisodesResult {
+    func getEpisodeList(
+        page: Int?,
+        filters: EpisodeFilterParameters?
+    ) async throws -> PaginatedEpisodesResult {
         try await networkManager.runRequest(EpisodeRequest(
             page: page,
-            name: name,
-            episode: episode
+            filters: filters
         ))
     }
 }
@@ -40,27 +31,33 @@ struct EpisodeRequest: Request {
     var urlPath: String { "episode" }
     var httpMethod: HTTPMethod { .get }
     var body: Data? { nil }
-    var timeout: TimeInterval { 30 }
+    var timeout: TimeInterval { 10 }
     var parameters: [String : String] {
         var params: [String : String] = [:]
         if let page { params["page"] = page.formatted() }
-        if let name, !name.isEmpty { params["name"] = name }
-        if let episode, !episode.isEmpty { params["episode"] = episode }
+        if let name = filters?.name, !name.isEmpty { params["name"] = name }
+        if let episode = filters?.episode, !episode.isEmpty { params["episode"] = episode }
         return params
     }
 
     var page: Int?
-    var name: String?
-    var episode: String?
+    var filters: EpisodeFilterParameters?
 
     init(
         page: Int? = nil,
-        name: String? = nil,
-        episode: String? = nil
+        filters: EpisodeFilterParameters? = nil
     ) {
         self.page = page
-        self.name = name
-        self.episode = episode
+        self.filters = filters
+    }
+}
+
+struct EpisodeFilterParameters: Equatable {
+    var name: String = ""
+    var episode: String = ""
+
+    var areFiltersSelected: Bool {
+        [name, episode].contains(where: { !$0.isEmpty })
     }
 }
 

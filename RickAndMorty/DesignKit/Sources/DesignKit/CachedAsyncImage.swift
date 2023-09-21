@@ -46,7 +46,7 @@ public struct AsyncImageView: View {
                 if let uiImage = UIImage(data: imageData) {
                     Image(uiImage: uiImage)
                         .resizable()
-                        .scaledToFit()
+                        .scaledToFill()
                 }
             case .failure:
                 Image(.errorImage)
