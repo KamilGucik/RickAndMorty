@@ -16,9 +16,6 @@ let package = Package(
         .target(
             name: "LocalStorageKit",
             dependencies: []
-        ),
-        .testTarget(
-            name: "LocalStorageKitTests",
-            dependencies: ["LocalStorageKit"]),
+        )
     ]
 )

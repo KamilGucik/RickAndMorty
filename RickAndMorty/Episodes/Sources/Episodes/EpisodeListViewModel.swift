@@ -16,8 +16,8 @@ class EpisodeListViewModel: ObservableObject {
     @Published var isLoadingNextPage = false
     @Published var showNextPageError = false
 
-    private var page = 1
-    private let episodesRepository: EpisodesRepositoryProtocol
+    var page = 1
+    let episodesRepository: EpisodesRepositoryProtocol
 
     init(episodesRepository: EpisodesRepositoryProtocol = EpisodesRepository()) {
         self.episodesRepository = episodesRepository
@@ -33,6 +33,7 @@ class EpisodeListViewModel: ObservableObject {
         } catch {
             isLoadingNextPage = false
             showNextPageError = true
+            self.page -= 1
         }
     }
 

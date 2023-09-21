@@ -55,3 +55,12 @@ struct PaginatedCharacterResult: Codable {
     let info: PaginationInfo
     let results: [Character]
 }
+
+extension PaginatedCharacterResult {
+    static var mock: Self {
+        .init(
+            info: .init(next: .init(string: "www.test.com")!),
+            results: Character.mockList(size: 1)
+        )
+    }
+}

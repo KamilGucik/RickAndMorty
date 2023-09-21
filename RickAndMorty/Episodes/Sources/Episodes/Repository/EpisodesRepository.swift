@@ -35,8 +35,7 @@ struct EpisodeRequest: Request {
     var parameters: [String : String] {
         var params: [String : String] = [:]
         if let page { params["page"] = page.formatted() }
-        if let name = filters?.name, !name.isEmpty { params["name"] = name }
-        if let episode = filters?.episode, !episode.isEmpty { params["episode"] = episode }
+        filters?.parameters.forEach { params[$0.key] = $0.value }
         return params
     }
 
@@ -59,9 +58,25 @@ struct EpisodeFilterParameters: Equatable {
     var areFiltersSelected: Bool {
         [name, episode].contains(where: { !$0.isEmpty })
     }
+
+    var parameters: [String: String] {
+        var params: [String : String] = [:]
+        if !name.isEmpty { params["name"] = name }
+        if !episode.isEmpty { params["episode"] = episode }
+        return params
+    }
 }
 
 struct PaginatedEpisodesResult: Codable {
     let info: PaginationInfo
     let results: [Episode]
+}
+
+extension PaginatedEpisodesResult {
+    static var mock: Self {
+        .init(
+            info: .init(next: .init(string: "www.test.com")!),
+            results: Episode.mockList(size: 1)
+        )
+    }
 }

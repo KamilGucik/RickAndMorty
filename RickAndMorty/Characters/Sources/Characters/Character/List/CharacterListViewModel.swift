@@ -16,8 +16,8 @@ class CharacterListViewModel: ObservableObject {
     @Published var isLoadingNextPage = false
     @Published var showNextPageError = false
 
-    private var page: Int = 1
-    private let charactersRepository: CharactersRepositoryProtocol
+    var page: Int = 1
+    let charactersRepository: CharactersRepositoryProtocol
 
     init(charactersRepository: CharactersRepositoryProtocol = CharactersRepository()) {
         self.charactersRepository = charactersRepository
@@ -33,6 +33,7 @@ class CharacterListViewModel: ObservableObject {
         } catch {
             isLoadingNextPage = false
             showNextPageError = true
+            self.page -= 1
         }
     }
 
