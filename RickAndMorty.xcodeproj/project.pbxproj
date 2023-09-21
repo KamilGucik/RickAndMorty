@@ -9,25 +9,27 @@
 /* Begin PBXBuildFile section */
 		8E1519782AB8C1970006F6E9 /* RickAndMortyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1519772AB8C1970006F6E9 /* RickAndMortyApp.swift */; };
 		8E15197A2AB8C1970006F6E9 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1519792AB8C1970006F6E9 /* Menu.swift */; };
-		8E15197C2AB8C1990006F6E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E15197B2AB8C1990006F6E9 /* Assets.xcassets */; };
 		8E1519802AB8C1990006F6E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E15197F2AB8C1990006F6E9 /* Preview Assets.xcassets */; };
 		8E1519892AB8C9110006F6E9 /* NetworkKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1519882AB8C9110006F6E9 /* NetworkKit */; };
 		8E15198F2AB8DA160006F6E9 /* SerializationKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E15198E2AB8DA160006F6E9 /* SerializationKit */; };
 		8E1519922AB9005E0006F6E9 /* Episodes in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1519912AB9005E0006F6E9 /* Episodes */; };
 		8E1519952AB90A460006F6E9 /* Characters in Frameworks */ = {isa = PBXBuildFile; productRef = 8E1519942AB90A460006F6E9 /* Characters */; };
+		8E6E289D2ABB4CED00568280 /* DesignKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E6E289C2ABB4CED00568280 /* DesignKit */; };
+		8E9236AF2ABB767700DC20E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9236AE2ABB767600DC20E1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8E1519742AB8C1970006F6E9 /* RickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E1519772AB8C1970006F6E9 /* RickAndMortyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RickAndMortyApp.swift; sourceTree = "<group>"; };
 		8E1519792AB8C1970006F6E9 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
-		8E15197B2AB8C1990006F6E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E15197D2AB8C1990006F6E9 /* RickAndMorty.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RickAndMorty.entitlements; sourceTree = "<group>"; };
 		8E15197F2AB8C1990006F6E9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8E1519862AB8C8F80006F6E9 /* NetworkKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = NetworkKit; sourceTree = "<group>"; };
 		8E15198D2AB8D9F80006F6E9 /* SerializationKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SerializationKit; sourceTree = "<group>"; };
 		8E1519902AB8F7C70006F6E9 /* Episodes */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Episodes; sourceTree = "<group>"; };
 		8E1519932AB901CA0006F6E9 /* Characters */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Characters; sourceTree = "<group>"; };
+		8E6E289B2ABB48E900568280 /* DesignKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignKit; sourceTree = "<group>"; };
+		8E9236AE2ABB767600DC20E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +41,7 @@
 				8E1519892AB8C9110006F6E9 /* NetworkKit in Frameworks */,
 				8E1519952AB90A460006F6E9 /* Characters in Frameworks */,
 				8E1519922AB9005E0006F6E9 /* Episodes in Frameworks */,
+				8E6E289D2ABB4CED00568280 /* DesignKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,13 +68,14 @@
 		8E1519762AB8C1970006F6E9 /* RickAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				8E6E289B2ABB48E900568280 /* DesignKit */,
 				8E1519932AB901CA0006F6E9 /* Characters */,
 				8E1519902AB8F7C70006F6E9 /* Episodes */,
 				8E15198D2AB8D9F80006F6E9 /* SerializationKit */,
 				8E1519862AB8C8F80006F6E9 /* NetworkKit */,
 				8E1519772AB8C1970006F6E9 /* RickAndMortyApp.swift */,
 				8E1519792AB8C1970006F6E9 /* Menu.swift */,
-				8E15197B2AB8C1990006F6E9 /* Assets.xcassets */,
+				8E9236AE2ABB767600DC20E1 /* Assets.xcassets */,
 				8E15197D2AB8C1990006F6E9 /* RickAndMorty.entitlements */,
 				8E15197E2AB8C1990006F6E9 /* Preview Content */,
 			);
@@ -114,6 +118,7 @@
 				8E15198E2AB8DA160006F6E9 /* SerializationKit */,
 				8E1519912AB9005E0006F6E9 /* Episodes */,
 				8E1519942AB90A460006F6E9 /* Characters */,
+				8E6E289C2ABB4CED00568280 /* DesignKit */,
 			);
 			productName = RickAndMorty;
 			productReference = 8E1519742AB8C1970006F6E9 /* RickAndMorty.app */;
@@ -157,8 +162,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E9236AF2ABB767700DC20E1 /* Assets.xcassets in Resources */,
 				8E1519802AB8C1990006F6E9 /* Preview Assets.xcassets in Resources */,
-				8E15197C2AB8C1990006F6E9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +299,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RickAndMorty/RickAndMorty.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -334,6 +340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RickAndMorty/RickAndMorty.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -409,6 +416,10 @@
 		8E1519942AB90A460006F6E9 /* Characters */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Characters;
+		};
+		8E6E289C2ABB4CED00568280 /* DesignKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
